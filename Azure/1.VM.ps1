@@ -3,9 +3,7 @@ az login
 
 #2 - Create resource group
 Write-Output 'Creating Resource Group...'
-# az account list-locations
-
-$rg = 'demo-rg-2'
+$rg = 'demo-2'
 $location = 'northeurope'
 
 az group create `
@@ -32,7 +30,8 @@ az network nsg create `
 Write-Output "Creating public IP..." 
 az network public-ip create `
     --name $rg-vnet-1-pub-ip-1 `
-    --resource-group $rg
+    --resource-group $rg `
+    --allocation-method Static # or Dynamic
 
 #6.1 - Create Network Interface for Linux VM
 Write-Output 'Creating NIC for Linux VM...'
