@@ -1,0 +1,8 @@
+apiVersion: "aadpodidentity.k8s.io/v1"
+kind: AzureIdentity
+metadata:
+  name: ai-aks
+spec:
+  type: 1
+  ResourceID: /subscriptions/d85ed6ec-f82d-42e6-bb32-895e8dd51a3d/resourceGroups/Main/providers/Microsoft.Compute/disks/aksmanageddisk  
+  ClientID: 69d4c7f6-f125-4fee-9eb3-d1d585debe7e

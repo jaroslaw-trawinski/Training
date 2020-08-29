@@ -1,0 +1,7 @@
+
+
+$ACR_NAME=demok8s
+$SERVICE_PRINCIPAL_NAME=acr-service-principal
+
+echo $SP_APP_ID = e7de430d-f5a1-4e77-98f3-ee82784344c1
+echo $SP_PASSWD = 3325e8fb-3191-4535-9f3e-1d3a8f979989

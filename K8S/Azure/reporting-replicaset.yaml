@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: reporting-rs
+  labels:
+    app: guestbook
+    tier: frontend
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: reporting
+      env: demo
+  template:
+    metadata:
+      labels:
+        app: reporting
+        rs: reporting-rs
+        env: demo
+    spec:
+      containers:
+      - name: reporting-app
+        image: demok8s.azurecr.io/fela.reporting.api:20200215.6
+        imagePullPolicy: Always
+        env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Development

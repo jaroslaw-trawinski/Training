@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: pkad
+  labels:
+    app: rs-pkad
+spec:
+  replicas: 3
+  selector:
+    matchLabels: 
+      tier: pkad-app
+  template:
+    metadata: 
+      labels:
+        tier: pkad-app
+    spec:
+      containers:
+      - name: pkad
+        image: poznajkubernetes/pkad:green

@@ -1,0 +1,49 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-tools
+  labels:
+    app: tools
+spec:
+  ports:
+  - port: 80
+    name: web
+  clusterIP: None
+  selector:
+    app: tools
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: tools
+spec:
+  selector:
+    matchLabels:
+      app: tools
+  replicas: 3
+  serviceName: svc-tools
+  template:
+    metadata:
+      labels:
+        app: tools
+    spec:
+      # terminationGracePeriodSeconds: 10
+      containers:
+      - name: nginx
+        image: giantswarm/tiny-tools
+        name: tools
+        command: ["/bin/sh", "-c"]
+        args: ["sleep 3600"]
+        volumeMounts:
+        - name: data
+          mountPath: /usr/share/nginx/html
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: 
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi

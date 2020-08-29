@@ -1,0 +1,24 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  creationTimestamp: null
+  name: cron-job-demo
+spec:
+  schedule: "*/1 * * * *"
+  concurrencyPolicy : Forbid
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+      name: cron-job-demo
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+        spec:
+          containers:
+          - image: busybox
+            name: cron-job-demo
+            resources: {}
+            command: ["sh", "-c"]
+            args: ["sleep 90s"]
+          restartPolicy: OnFailure

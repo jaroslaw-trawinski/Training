@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+    name: tools-1
+    labels:
+      app: tools
+spec:
+  containers:
+  - image: giantswarm/tiny-tools
+    name: tools
+    command: ["/bin/sh", "-c"]
+    args: ["sleep 3600"]
+    volumeMounts:
+      - name: volume-pvc
+        mountPath: /azure
+  volumes:
+    - name: volume-pvc
+      persistentVolumeClaim: 
+        claimName: pvc-azure-default

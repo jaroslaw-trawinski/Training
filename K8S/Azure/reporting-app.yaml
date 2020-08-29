@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: reporting-app
+    app: reporting
+    env: development
+  name: reporting-app
+spec:
+  containers:
+    - image: demok8s.azurecr.io/fela.reporting.api:20200215.6
+      imagePullPolicy: Always
+      name: reporting-app
+      env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+
+          
+  restartPolicy: Never

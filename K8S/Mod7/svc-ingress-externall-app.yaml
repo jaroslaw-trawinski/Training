@@ -1,0 +1,95 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-nginx
+  namespace: ingress-external
+spec:
+  selector:
+    app: nginx
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+      protocol: TCP
+---
+apiVersion: v1
+kind: Pod
+
+metadata:
+    name: nginx-1
+    namespace: ingress-external
+    labels:
+      app: nginx
+      version: "1"
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    resources: {}
+    ports: 
+        - containerPort: 80
+          name: http
+    volumeMounts:
+        - name: workdir
+          mountPath: "/usr/share/nginx/html"
+ 
+  initContainers:
+  - image: busybox
+    name: init-install
+    command: ["/bin/sh","-c"]
+    args: ["echo 'Hello World fron Instance 1!' > /work-dir/index.html"]
+    volumeMounts:
+    - name: workdir
+      mountPath: /work-dir
+
+  volumes:
+  - name: workdir
+    emptyDir: {}
+  restartPolicy: Never
+---
+apiVersion: v1
+kind: Pod
+metadata:
+    name: nginx-2
+    namespace: ingress-external
+    labels:
+      app: nginx
+      version: "2"
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    ports: 
+        - containerPort: 80
+          name: http
+    volumeMounts:
+        - name: workdir
+          mountPath: "/usr/share/nginx/html"
+ 
+  initContainers:
+  - image: busybox
+    name: init-install
+    command: ["/bin/sh","-c"]
+    args: ["echo 'Hello World fron Instance 2!' > /work-dir/index.html"]
+    volumeMounts:
+    - name: workdir
+      mountPath: /work-dir
+
+  volumes:
+  - name: workdir
+    emptyDir: {}
+  restartPolicy: Never
+---
+apiVersion: v1
+kind: Pod
+metadata:
+    name: tools
+    namespace: ingress-external
+    labels:
+      app: tools
+spec:
+  containers:
+  - image: giantswarm/tiny-tools
+    name: tools
+    command: ["/bin/sh", "-c"]
+    args: ["sleep 3600"]

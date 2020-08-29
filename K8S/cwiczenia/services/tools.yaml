@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: tools
+  name: tools
+spec:
+  containers:
+  - args:
+    - sh
+    - -c
+    - sleep 3600
+    image: giantswarm/tiny-tools
+    name: tools
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: heloapp-create
+  labels:
+    app: heloapp-create
+  annotations: {
+    kubernetes.io/change-cause: "Relesed version v2.0.1"
+  }
+  
+spec:
+  minReadySeconds: 20
+  replicas: 3
+  selector:
+    matchLabels:
+      app: heloapp-create
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: heloapp-create
+    spec:
+      containers:
+      - image: poznajkubernetes/helloapp:multi
+        name: poznajkuberneteshelloapp
+        resources: {}
+        env:
+          - name: version
+            value: v2.0.1
+

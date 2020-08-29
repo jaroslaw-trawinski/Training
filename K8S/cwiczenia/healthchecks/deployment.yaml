@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nginx
+    env: demo
+  name: nginx
+spec:
+  replicas: 15
+  strategy:
+    rollingUpdate:
+      maxSurge: 0
+      maxUnavailable: 1
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: nginx
+      env: demo
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nginx
+        env: demo
+        createdby: deployment
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        args:
+            - sh
+            - -c
+            - touch /ready;sleep 3600
+        resources: {}
+        readinessProbe:
+                exec:
+                    command: 
+                     - cat
+                     - /ready
+                initialDelaySeconds: 10 
+        ports:
+                - containerPort: 80
+                  
+status: {}

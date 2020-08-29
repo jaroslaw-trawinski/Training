@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  creationTimestamp: null
+  name: hello-job
+spec:
+  completions: 10 
+  parallelism: 3  
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      containers:
+      - command:
+        - sh
+        - -c
+        - eho 'Hello from job';sleep 20
+        image: busybox
+        name: hello-job
+        resources: {}
+      restartPolicy: Never
+status: {}

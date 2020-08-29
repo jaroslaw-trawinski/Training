@@ -1,0 +1,19 @@
+kubectl create -f filename.yml -saveconfiguration
+kubectl apply  -f fileName.yml
+kubectl get pods
+kubectl get pods -w
+
+kubectl pod describe podName
+
+kubectl log podName
+
+kubectl port-forward PodName localPort:remotePort
+
+Mod3:
+tworzenie config mapy z wartościami + wartościami z pliku
+kubectl create configmap --from-literal=Key1=Value1 --from-literal=Key2=Value2 --from-file=./cmFile.yml
+kubectl get cm CofigMapName -o yml
+kubectl describe cm ConfigNampName
+
+
+kubectl exec POD -- printenv

@@ -1,0 +1,12 @@
+{
+  "clientId": "69d4c7f6-f125-4fee-9eb3-d1d585debe7e",
+  "clientSecretUrl": "https://control-westeurope.identity.azure.net/subscriptions/d85ed6ec-f82d-42e6-bb32-895e8dd51a3d/resourcegroups/Main/providers/Microsoft.ManagedIdentity/userAssignedIdentities/AksIdentity/credentials?tid=4b3244ec-5515-4c69-a444-5083823a3ab0&oid=8de1e381-5e58-46ca-a5c2-b7e80cbbc270&aid=69d4c7f6-f125-4fee-9eb3-d1d585debe7e",
+  "id": "/subscriptions/d85ed6ec-f82d-42e6-bb32-895e8dd51a3d/resourcegroups/Main/providers/Microsoft.ManagedIdentity/userAssignedIdentities/AksIdentity",
+  "location": "westeurope",
+  "name": "AksIdentity",
+  "principalId": "8de1e381-5e58-46ca-a5c2-b7e80cbbc270",
+  "resourceGroup": "Main",
+  "tags": {},
+  "tenantId": "4b3244ec-5515-4c69-a444-5083823a3ab0",
+  "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+}

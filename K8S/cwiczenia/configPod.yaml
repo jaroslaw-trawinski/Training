@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: busybox
+  name: busyboxconfig
+spec:
+  containers:
+  - args:
+    - /bin/sh
+    - -c
+    - env
+    image: busybox
+    name: busybox
+    resources: {}
+    env:
+            - name: example_env
+              valueFrom:
+                    configMapKeyRef:
+                            name: myconfigmap
+                            key: key1
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+status: {}

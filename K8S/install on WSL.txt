@@ -1,0 +1,12 @@
+
+curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.14.8/bin/linux/amd64/kubectl
+chmod +x ./kubectl
+sudo mv ./kubectl  /usr/local/bin/kubectl
+
+Bash:
+cd ~
+sudo git clone https://github.com/jonmosco/kube-ps1.git .kube-ps1
+sudo git clone https://github.com/PoznajKubernetes/bash-theme.git .poznajkubernetes-bash
+source ~/.poznajkubernetes-bash/poznajkubernetes.sh
+ln -s /mnt/c/Users/jaros/.kube .kube
+

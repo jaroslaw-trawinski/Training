@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    run: busyboxes
+  name: busyboxes
+spec:
+  containers:
+  - args:
+    - /bin/sh
+    - -c
+    - echo 'hello world'; sleep 3600
+    image: busybox
+    name: busyboxes1
+    resources: {}
+  - args:
+    - /bin/sh
+    - -c
+    - echo 'hello world'; sleep 3600
+    image: busybox
+    name: busyboxes2
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+
+  dnsPolicy: ClusterFirst
+  restartPolicy: Never
+

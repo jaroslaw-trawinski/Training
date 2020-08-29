@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-aks-manageddisk
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+    - ReadOnlyMany
+  persistentVolumeReclaimPolicy: Retain
+  volumeMode: Filesystem
+  azureDisk:
+    kind: Managed
+    diskName: aksdisk2
+    diskURI: /subscriptions/d85ed6ec-f82d-42e6-bb32-895e8dd51a3d/resourceGroups/MC_Main_AksCluster_westeurope/providers/Microsoft.Compute/disks/aksdisk2
+    kind: Managed
