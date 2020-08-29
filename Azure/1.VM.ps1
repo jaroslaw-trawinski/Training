@@ -1,11 +1,8 @@
 #1 - Login into azure account
 az login
 
-#2 - Login into azure account
-# az account show
-
-#3 - Create resource group
-echo 'Creating Resource Group...'
+#2 - Create resource group
+Write-Output 'Creating Resource Group...'
 # az account list-locations
 
 $rg = 'demo-rg-2'
@@ -15,8 +12,8 @@ az group create `
     --name $rg  `
     --location $location
 
-#4 - Create virtual network
-echo 'Creating VNET...'
+#3 - Create virtual network
+Write-Output 'Creating VNET...'
 az network vnet create `
     --name $rg-vnet-1 `
     --resource-group $rg `
@@ -26,19 +23,19 @@ az network vnet create `
     --subnet-prefix 172.1.1.0/24 
 
 #4 - Create network security group
-echo 'Creating NSG...'
+Write-Output 'Creating NSG...'
 az network nsg create `
     --name $rg-vnet-1-nsg-1 `
     --resource-group $rg
 
 #5 - Create public IP address
-echo 'Creating public IP...'
+Write-Output "Creating public IP..." 
 az network public-ip create `
     --name $rg-vnet-1-pub-ip-1 `
     --resource-group $rg
 
 #6.1 - Create Network Interface for Linux VM
-echo 'Creating NIC for Linux VM...'
+Write-Output 'Creating NIC for Linux VM...'
 az network nic create `
     --name $rg-vnet-1-nic-linux-1 `
     --resource-group $rg `
@@ -49,7 +46,7 @@ az network nic create `
     # --public-ip-address $rg-vnet-1-pub-ip-1 #disallowed by policy
 
 #6.2 - Create Linux VM
-echo 'Creating Linux VM...'
+Write-Output 'Creating Linux VM...'
 az vm create `
     --name $rg-vm-linux-1 `
     --resource-group $rg `
@@ -71,7 +68,7 @@ az vm create `
     --ssh-key-value C:\Users\jaros\.ssh\id_rsa.pub
 
 #7.1 - Create Network Interface for Windows VM
-echo 'Creating NIC for Windows VM...'
+Write-Output 'Creating NIC for Windows VM...'
 az network nic create `
     --name $rg-vnet-1-nic-windows-1 `
     --resource-group $rg `
@@ -82,7 +79,7 @@ az network nic create `
     # --public-ip-address $rg-pub-ip-1v #disallowed by policy
 
 #7.2 - Create Windows VM
-echo 'Creating Windows VM...'
+Write-Output 'Creating Windows VM...'
 az vm create `
     --name $rg-vm-win1 `
     --resource-group $rg `
@@ -94,19 +91,19 @@ az vm create `
 
 
 #8 - Get list of VMs
-echo 'Getting list of VM IDs...'
+Write-Output 'Getting list of VM IDs...'
 $VmIds = az vm list `
     --resource-group $rg `
     -o tsv `
     --query "[].id" 
 
-echo 'Created and running VMs:'
-echo $VmIds
+Write-Output 'Created and running VMs:'
+Write-Output $VmIds
 
 #9 - Stop VMs
-echo 'Stopping VMS...'
+Write-Output 'Stopping VMS...'
 # az vm stop --ids $VmIds
 
 #10 - Deallocate VMs 
-echo 'Deallocating VMS...'
+Write-Output 'Deallocating VMS...'
 # az vm deallocate --ids $VmIds
