@@ -85,9 +85,7 @@ az vm list-ip-addresses -o table
 ping 172.1.1.4
 
 #10 - Login via SSH to VM Linux
-# ssh-keygen -H -F 172.1.1.4
-# ssh-keygen -R 172.1.1.4
-ssh demoadmin@172.1.1.4
+ssh demoadmin@172.1.1.7
 
 #11 - Remove client certificate
 $clientCert = Get-ChildItem -Path Cert:\CurrentUser\My | Where-Object {$_.Subject -match "CN=AzureP2SClient1"}

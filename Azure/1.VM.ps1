@@ -3,7 +3,7 @@ az login
 
 #2 - Create resource group
 Write-Output 'Creating Resource Group...'
-$rg = 'demo-2'
+$rg = 'demo'
 $location = 'northeurope'
 
 az group create `
@@ -31,7 +31,7 @@ Write-Output "Creating public IP..."
 az network public-ip create `
     --name $rg-vnet-1-pub-ip-1 `
     --resource-group $rg `
-    --allocation-method Static # or Dynamic
+    --allocation-method Dynamic # or Static
 
 #6.1 - Create Network Interface for Linux VM
 Write-Output 'Creating NIC for Linux VM...'
@@ -50,22 +50,13 @@ az vm create `
     --name $rg-vm-linux-1 `
     --resource-group $rg `
     --location $location `
-    --image "rhel" `
+    --image "UbuntuLTS" `
     --nics $rg-vnet-1-nic-linux-1 `
     --authentication-type ssh `
     --admin-username demoadmin `
     --ssh-key-value C:\Users\jaros\.ssh\id_rsa.pub
 
-az vm create `
-    --name $rg-vm-linux-2 `
-    --resource-group $rg `
-    --location $location `
-    --image "rhel" `
-    --nics $rg-vnet-1-nic-linux-1 `
-    --authentication-type ssh `
-    --admin-username demoadmin `
-    --ssh-key-value C:\Users\jaros\.ssh\id_rsa.pub
-
+az vm image list -o table
 #7.1 - Create Network Interface for Windows VM
 Write-Output 'Creating NIC for Windows VM...'
 az network nic create `
